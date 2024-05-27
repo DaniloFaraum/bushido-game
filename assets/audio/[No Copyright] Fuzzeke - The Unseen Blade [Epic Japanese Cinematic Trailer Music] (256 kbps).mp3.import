@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bnckc06v07f5"
+path="res://.godot/imported/[No Copyright] Fuzzeke - The Unseen Blade [Epic Japanese Cinematic Trailer Music] (256 kbps).mp3-1aa24347a63b4ecddea5fde10890d0da.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/[No Copyright] Fuzzeke - The Unseen Blade [Epic Japanese Cinematic Trailer Music] (256 kbps).mp3"
+dest_files=["res://.godot/imported/[No Copyright] Fuzzeke - The Unseen Blade [Epic Japanese Cinematic Trailer Music] (256 kbps).mp3-1aa24347a63b4ecddea5fde10890d0da.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

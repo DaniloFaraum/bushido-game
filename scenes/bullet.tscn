@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://7h4x66rwjmyq"]
+
+[ext_resource type="Script" path="res://scripts/Bullet.gd" id="1_wmps8"]
+[ext_resource type="Texture2D" uid="uid://ci46obta30fgt" path="res://assets/bullet1.png" id="2_ufdyn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3w0f5"]
+size = Vector2(130, 130)
+
+[sub_resource type="Curve" id="Curve_0q4jd"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, 200), 0.0, -1676.61, 0, 0, Vector2(1, -200), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Bullet" type="Node2D"]
+scale = Vector2(0.105, 0.105)
+script = ExtResource("1_wmps8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(16.27, 16.27)
+texture = ExtResource("2_ufdyn")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(2.68221e-06, 1.43051e-05)
+scale = Vector2(0.999999, 0.999999)
+collision_layer = 2
+collision_mask = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 9.09495e-13)
+shape = SubResource("RectangleShape2D_3w0f5")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-7.62939e-06, 0)
+emitting = false
+amount = 100
+lifetime = 0.4
+randomness = 1.0
+lifetime_randomness = 0.89
+emission_shape = 1
+emission_sphere_radius = 73.4
+gravity = Vector2(-900, 0)
+angular_velocity_min = 80.0
+angular_velocity_max = 80.0
+linear_accel_curve = SubResource("Curve_0q4jd")
+radial_accel_max = 46.46
+damping_max = 60.606
+scale_amount_max = 5.0
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

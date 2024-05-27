@@ -1,0 +1,217 @@
+[gd_scene load_steps=16 format=3 uid="uid://cij2l8ttp2h5w"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_jyrrl"]
+[ext_resource type="PackedScene" uid="uid://mnebcs1xm6dy" path="res://scenes/player.tscn" id="1_ktiui"]
+[ext_resource type="PackedScene" uid="uid://lvxl5ru4v7d3" path="res://scenes/Stages/NightClouds.tscn" id="4_krval"]
+[ext_resource type="AudioStream" uid="uid://bw3xv4go2y71k" path="res://assets/audio/Japanese cool music (No Copyright) SHAMISEN SAMURAI ROCK [Free BGM] (256 kbps).mp3" id="4_q3l7d"]
+[ext_resource type="Texture2D" uid="uid://cm1tqb4t70tjp" path="res://assets/Healthbar/healthbar.png" id="5_e5xib"]
+[ext_resource type="Texture2D" uid="uid://bbdal53vx3lo7" path="res://assets/Healthbar/healthbarFill.png" id="6_s36x5"]
+[ext_resource type="Texture2D" uid="uid://f6ca3dp5e6qk" path="res://assets/Healthbar/healthbarP2.png" id="7_k2djj"]
+[ext_resource type="Script" path="res://scripts/Healthbar.gd" id="7_nipuv"]
+[ext_resource type="Texture2D" uid="uid://t2fjvrgkn2nn" path="res://assets/life.png" id="8_w47sj"]
+
+[sub_resource type="GDScript" id="GDScript_pvi6g"]
+script/source = "extends Camera2D
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	$AnimationPlayer.play(\"camera_dinamism\")
+	pass
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass"
+
+[sub_resource type="Animation" id="Animation_2o213"]
+resource_name = "camera_dinamism"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-32, -24), Vector2(-48, 48), Vector2(32, -24), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_khpjl"]
+_data = {
+"camera_dinamism": SubResource("Animation_2o213")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r5mr4"]
+size = Vector2(1426, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sua4i"]
+size = Vector2(101, 1040)
+
+[sub_resource type="Environment" id="Environment_hyg67"]
+background_mode = 3
+glow_enabled = true
+glow_levels/1 = 0.5
+glow_levels/2 = 2.0
+glow_levels/3 = 0.0
+glow_strength = 1.29
+glow_bloom = 0.11
+glow_blend_mode = 0
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_jyrrl")
+
+[node name="DaySkyParallax" parent="." instance=ExtResource("4_krval")]
+offset = Vector2(-87.23, -52.875)
+scale = Vector2(1.2, 1.2)
+transform = Transform2D(1.2, 0, 0, 1.2, -87.23, -52.875)
+scroll_ignore_camera_zoom = true
+
+[node name="CanvasModulate2" type="CanvasModulate" parent="DaySkyParallax"]
+color = Color(0.584314, 0.588235, 0.462745, 1)
+
+[node name="Player1" parent="." instance=ExtResource("1_ktiui")]
+position = Vector2(115, 336)
+
+[node name="Player2" parent="." instance=ExtResource("1_ktiui")]
+position = Vector2(1168, 336)
+playerNum = 2
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.617455, 0.617455, 0.617455, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+position_smoothing_enabled = true
+script = SubResource("GDScript_pvi6g")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D"]
+libraries = {
+"": SubResource("AnimationLibrary_khpjl")
+}
+speed_scale = 0.05
+
+[node name="BorderColisions" type="Node2D" parent="Camera2D"]
+position = Vector2(658.402, -46.1983)
+
+[node name="Top" type="StaticBody2D" parent="Camera2D/BorderColisions"]
+position = Vector2(0, 40)
+collision_layer = 4
+collision_mask = 19
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/BorderColisions/Top"]
+shape = SubResource("RectangleShape2D_r5mr4")
+
+[node name="Bottom" type="StaticBody2D" parent="Camera2D/BorderColisions"]
+position = Vector2(0, 776)
+collision_layer = 4
+collision_mask = 19
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/BorderColisions/Bottom"]
+shape = SubResource("RectangleShape2D_r5mr4")
+
+[node name="Left" type="StaticBody2D" parent="Camera2D/BorderColisions"]
+position = Vector2(-776, 400)
+collision_layer = 4
+collision_mask = 19
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/BorderColisions/Left"]
+shape = SubResource("RectangleShape2D_sua4i")
+
+[node name="Right" type="StaticBody2D" parent="Camera2D/BorderColisions"]
+position = Vector2(776, 400)
+collision_layer = 4
+collision_mask = 19
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/BorderColisions/Right"]
+shape = SubResource("RectangleShape2D_sua4i")
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_q3l7d")
+autoplay = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hyg67")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TopUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -640.0
+offset_right = 640.0
+offset_bottom = 64.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Healthbar1" type="TextureProgressBar" parent="CanvasLayer/TopUI" node_paths=PackedStringArray("player")]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 24.0
+offset_right = 632.0
+offset_bottom = 64.0
+nine_patch_stretch = true
+texture_over = ExtResource("5_e5xib")
+texture_progress = ExtResource("6_s36x5")
+script = ExtResource("7_nipuv")
+player = NodePath("../../../Player1")
+
+[node name="LifeContainer1" type="HBoxContainer" parent="CanvasLayer/TopUI"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.00625
+anchor_right = 0.00625
+offset_left = 16.0
+offset_top = 72.0
+offset_right = 100.0
+offset_bottom = 112.0
+scale = Vector2(0.5, 0.5)
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/TopUI/LifeContainer1"]
+layout_mode = 2
+texture = ExtResource("8_w47sj")
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/TopUI/LifeContainer1"]
+layout_mode = 2
+texture = ExtResource("8_w47sj")
+expand_mode = 2
+
+[node name="Healthbar2" type="TextureProgressBar" parent="CanvasLayer/TopUI" node_paths=PackedStringArray("player")]
+layout_mode = 0
+offset_left = 648.0
+offset_top = 24.0
+offset_right = 1267.0
+offset_bottom = 64.0
+value = 50.0
+fill_mode = 1
+nine_patch_stretch = true
+texture_over = ExtResource("7_k2djj")
+texture_progress = ExtResource("6_s36x5")
+script = ExtResource("7_nipuv")
+player = NodePath("../../../Player2")
+
+[node name="LifeContainer2" type="HBoxContainer" parent="CanvasLayer/TopUI"]
+visible = false
+layout_mode = 0
+offset_left = 1264.0
+offset_top = 72.0
+offset_right = 1348.0
+offset_bottom = 112.0
+scale = Vector2(-0.5, 0.5)
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/TopUI/LifeContainer2"]
+layout_mode = 2
+texture = ExtResource("8_w47sj")
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/TopUI/LifeContainer2"]
+layout_mode = 2
+texture = ExtResource("8_w47sj")
+expand_mode = 2

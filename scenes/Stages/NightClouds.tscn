@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://lvxl5ru4v7d3"]
+
+[ext_resource type="Texture2D" uid="uid://2q8jp13jp0of" path="res://assets/Clouds Night/1.png" id="1_kng40"]
+[ext_resource type="Texture2D" uid="uid://danggmlhb5xub" path="res://assets/Clouds Night/2.png" id="2_6jl88"]
+[ext_resource type="Texture2D" uid="uid://bkujojj2y1ao0" path="res://assets/Clouds Night/3.png" id="3_xqsr6"]
+[ext_resource type="Texture2D" uid="uid://brbatvfoexlmf" path="res://assets/Clouds Night/4.png" id="4_jbeb6"]
+
+[sub_resource type="GDScript" id="GDScript_ejdx1"]
+script/source = "extends ParallaxBackground
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	scroll_base_offset.x -= 50 * delta
+"
+
+[node name="DaySkyParallax" type="ParallaxBackground"]
+script = SubResource("GDScript_ejdx1")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(640, 360)
+scale = Vector2(2.25, 2.25)
+texture = ExtResource("1_kng40")
+
+[node name="Moon" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.7, 0.7)
+motion_mirroring = Vector2(1288, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Moon"]
+scale = Vector2(2.25, 2.25)
+texture = ExtResource("2_6jl88")
+centered = false
+
+[node name="BackClouds" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(1288, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="BackClouds"]
+scale = Vector2(2.25, 2.25)
+texture = ExtResource("3_xqsr6")
+centered = false
+
+[node name="FrontClouds" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(2, 2)
+motion_offset = Vector2(1288, 0)
+motion_mirroring = Vector2(1288, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="FrontClouds"]
+scale = Vector2(2.25, 2.25)
+texture = ExtResource("4_jbeb6")
+centered = false

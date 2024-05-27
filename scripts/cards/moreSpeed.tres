@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Card" load_steps=3 format=3 uid="uid://dgdqvk0vbjdcd"]
+
+[ext_resource type="Script" path="res://scripts/cardResource.gd" id="1_666yk"]
+[ext_resource type="Texture2D" uid="uid://ci46obta30fgt" path="res://assets/bullet1.png" id="1_y5plt"]
+
+[resource]
+script = ExtResource("1_666yk")
+playerOwner = 0
+name = "Nimble Flight"
+effect = "speed"
+ammount = 200.0
+image = ExtResource("1_y5plt")
+description = "+ Speed"

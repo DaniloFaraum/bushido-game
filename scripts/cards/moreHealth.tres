@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Card" load_steps=3 format=3 uid="uid://cfy2hdnj5ow07"]
+
+[ext_resource type="Texture2D" uid="uid://t2fjvrgkn2nn" path="res://assets/life.png" id="1_810yc"]
+[ext_resource type="Script" path="res://scripts/cardResource.gd" id="1_rvjgo"]
+
+[resource]
+script = ExtResource("1_rvjgo")
+playerOwner = 0
+name = "Bulk Up"
+effect = "maxHealth"
+ammount = 20.0
+image = ExtResource("1_810yc")
+description = "+ Health"

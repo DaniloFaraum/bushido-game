@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8bsxhnm31k22"]
+
+[ext_resource type="Script" path="res://scripts/cardButton.gd" id="2_x5nf0"]
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(200, 250)
+offset_right = 200.0
+offset_bottom = 250.0
+flat = true
+script = ExtResource("2_x5nf0")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 250.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 184.0
+offset_bottom = 144.0
+
+[node name="Title" type="Label" parent="Panel"]
+layout_mode = 0
+offset_top = 152.0
+offset_right = 200.0
+offset_bottom = 175.0
+text = "TItulo carta"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Desc" type="Label" parent="Panel"]
+layout_mode = 0
+offset_top = 192.0
+offset_right = 200.0
+offset_bottom = 215.0
+text = "desc"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
